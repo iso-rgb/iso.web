@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İSO SARSILMAZ // Root Access</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0d0208;
+            --main-color: #00ff66;
+            --dim-color: #008f11;
+            --accent-color: #003b00;
+            --text-color: #e0e0e0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Fira Code', monospace;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Matrix Canvas Background */
+        #matrix-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.15;
+        }
+
+        /* Main Overlay Container */
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header / Glitch Effect */
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .glitch {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--main-color);
+            text-shadow: 0 0 10px var(--main-color), 0 0 20px var(--main-color);
+            position: relative;
+            display: inline-block;
+            letter-spacing: 2px;
+        }
+
+        .sub-title {
+            color: #888;
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        .status-bar {
+            margin-top: 15px;
+            font-size: 0.85rem;
+            color: var(--dim-color);
+        }
+
+        .status-online {
+            color: var(--main-color);
+            font-weight: bold;
+        }
+
+        /* Interactive Terminal Section */
+        .terminal-window {
+            background: rgba(13, 2, 8, 0.9);
+            border: 1px solid var(--dim-color);
+            box-shadow: 0 0 25px rgba(0, 255, 102, 0.15);
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+
+        .terminal-header {
+            background: #111;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #222;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .btn-red { background: #ff5f56; }
+        .btn-yellow { background: #ffbd2e; }
+        .btn-green { background: #27c93f; }
+
+        .terminal-title {
+            margin-left: 15px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .terminal-body {
+            padding: 20px;
+            min-height: 280px;
+            max-height: 400px;
+            overflow-y: auto;
+            font-size: 0.95rem;
+        }
+
+        .terminal-output {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .terminal-input-line {
+            display: flex;
+            align-items: center;
+        }
+
+        .prompt {
+            color: var(--main-color);
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .cmd-input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #fff;
+            font-size: 1rem;
+            width: 100%;
+        }
+
+        /* Feature Cards */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: rgba(20, 20, 20, 0.6);
+            border: 1px solid #222;
+            padding: 20px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: var(--main-color);
+            box-shadow: 0 0 15px rgba(0, 255, 102, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .card h3 {
+            color: var(--main-color);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card p {
+            color: #aaa;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Social Links */
+        .socials {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 50px;
+        }
+
+        .social-btn {
+            color: var(--main-color);
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 1px solid var(--dim-color);
+            border-radius: 4px;
+            transition: 0.3s;
+            font-weight: bold;
+            background: rgba(0, 255, 102, 0.05);
+        }
+
+        .social-btn:hover {
+            background: var(--main-color);
+            color: #000;
+            box-shadow: 0 0 15px var(--main-color);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            color: #444;
+            font-size: 0.8rem;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            .glitch { font-size: 2.2rem; }
+            .container { padding: 20px 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="matrix-canvas"></canvas>
+
+    <div class="container">
+        <header>
+            <div class="glitch">İSO SARSILMAZ</div>
+            <div class="sub-title">> SYSTEM ARCHITECT & CYBER OPERATIONS <</div>
+            <div class="status-bar">
+                STATUS: <span class="status-online">● SYSTEM ACTIVE</span> | ACCESS: <span style="color:red;">ROOT</span>
+            </div>
+        </header>
+
+        <!-- Interactive Terminal -->
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="buttons">
+                    <div class="btn btn-red"></div>
+                    <div class="btn btn-yellow"></div>
+                    <div class="btn btn-green"></div>
+                </div>
+                <div class="terminal-title">iso@sarsilmaz-desktop:~</div>
+            </div>
+            <div class="terminal-body" id="terminal-body">
+                <div class="terminal-output" id="terminal-output">
+                    Sistem başlatıldı...<br>
+                    Güvenlik katmanları yüklendi.<br>
+                    Komut listesini görmek için <b style="color: var(--main-color);">'help'</b> yazın ve Enter'a basın.
+                </div>
+                <div class="terminal-input-line">
+                    <span class="prompt">iso@root:~$</span>
+                    <input type="text" id="cmd-input" class="cmd-input" autofocus autocomplete="off">
+                </div>
+            </div>
+        </div>
+
+        <!-- Capability Cards -->
+        <div class="grid">
+            <div class="card">
+                <h3><span>01.</span> Sistem & Operasyon</h3>
+                <p>Derin sistem bilgisi, terminal yönetimi ve yüksek güvenlikli altyapı konfigürasyonları.</p>
+            </div>
+            <div class="card">
+                <h3><span>02.</span> Siber Güvenlik</h3>
+                <p>Ağ analizi, sistem zaafiyetleri, erişim protokolleri ve dijital savunma mimarisi.</p>
+            </div>
+            <div class="card">
+                <h3><span>03.</span> Web & Geliştirme</h3>
+                <p>Modern, hızlı ve dinamik dijital çözümler. Kesintisiz kodlama ve entegrasyon.</p>
+            </div>
+        </div>
+
+        <!-- Social Buttons -->
+        <div class="socials">
+            <a href="https://github.com" target="_blank" class="social-btn">[ GİTHUB ]</a>
+            <a href="https://instagram.com" target="_blank" class="social-btn">[ İNSTAGRAM ]</a>
+        </div>
+
+        <footer>
+            © 2026 İSO SARSILMAZ // ALL RIGHTS RESERVED.
+        </footer>
+    </div>
+
+    <script>
+        // Matrix Rain Effect
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
+        const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*';
+        const alphabet = katakana + latin;
+
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const rainDrop = Array.from({ length: columns }).fill(1);
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(13, 2, 8, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#00ff66';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < rainDrop.length; i++) {
+                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                ctx.fillText(text, i * fontSize, rainDrop[i] * fontSize);
+
+                if (rainDrop[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    rainDrop[i] = 0;
+                }
+                rainDrop[i]++;
+            }
+        }
+        setInterval(drawMatrix, 30);
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Interactive Terminal CLI
+        const cmdInput = document.getElementById('cmd-input');
+        const terminalOutput = document.getElementById('terminal-output');
+
+        const commands = {
+            'help': 'Kullanılabilir Komutlar:<br>- <b style="color:#00ff66">whoami</b> : İso Sarsılmaz kimdir?<br>- <b style="color:#00ff66">skills</b> : Yetenekler ve uzmanlıklar<br>- <b style="color:#00ff66">contact</b> : İletişim bilgileri<br>- <b style="color:#00ff66">clear</b> : Terminali temizler',
+            'whoami': 'İso Sarsılmaz: Eski sanal ortam tecrübeleriyle yoğrulmuş, sistem ve siber güvenlik odaklı dijital geliştirici.',
+            'skills': '[+] Linux / Termux Scripting<br>[+] Web Penetration & Security<br>[+] Front-end Architecture<br>[+] System Administration',
+            'contact': 'E-Posta: root@isosarsilmaz.com<br>Instagram: @isosarsilmaz',
+            'clear': 'CLEAR'
+        };
+
+        cmdInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                const input = this.value.trim().toLowerCase();
+                this.value = '';
+
+                if (input === '') return;
+
+                let response = commands[input] || `<span style="color: #ff5f56;">Komut bulunamadı: '${input}'. Komut listesi için 'help' yazın.</span>`;
+
+                if (response === 'CLEAR') {
+                    terminalOutput.innerHTML = '';
+                    return;
+                }
+
+                terminalOutput.innerHTML += `<br><br><span style="color: var(--main-color);">iso@root:~$ ${input}</span><br>${response}`;
+                document.getElementById('terminal-body').scrollTop = document.getElementById('terminal-body').scrollHeight;
+            }
+        });
+    </script>
+</body>
+</html>
