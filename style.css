@@ -119,6 +119,13 @@ body {
   font-weight: bold;
 }
 
+.hacker-bio {
+  color: #00e5ff;
+  font-size: 0.82rem;
+  margin: 5px 0;
+  line-height: 1.5;
+}
+
 .prompt {
   color: #00ff66;
   font-weight: bold;
@@ -144,7 +151,7 @@ body {
 .card-title {
   color: #00ff66;
   font-size: 1.15rem;
-  margin: 0 0 10px 0;
+  margin: 0 0 12px 0;
   font-weight: bold;
 }
 
@@ -153,4 +160,39 @@ body {
   font-size: 0.85rem;
   line-height: 1.5;
   margin: 0;
+}
+
+/* Social Links */
+.social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.social-item {
+  display: flex;
+  justify-content: space-between;
+  background: #030804;
+  border: 1px solid rgba(0, 255, 102, 0.3);
+  padding: 10px 12px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #00ff66;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.social-item:hover {
+  background: rgba(0, 255, 102, 0.15);
+  border-color: #00ff66;
+  box-shadow: 0 0 8px rgba(0, 255, 102, 0.4);
+}
+
+.social-icon {
+  color: #888;
+}
+
+.social-user {
+  font-weight: bold;
+  color: #00e5ff;
 }
