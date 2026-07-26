@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ISO | Root System</title>
+  <title>ISO SARSILMAZ | System HUD</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -21,51 +21,29 @@
     <p>> Komut satırı aktif. Mod değiştirmek için yukarıdaki butona basabilirsin.</p>
   </div>
 
-  <!-- 2. Arayüz: Portfolio / Galeri (GUI - Resimli / Kartlı Akış) -->
-  <div id="portfolio-screen" style="display: none; max-width: 900px; margin: 20px auto; padding: 20px; background: #111; color: #fff; text-align: center; border-radius: 8px;">
-    <h2 style="color: #00e5ff;">ISO MARKA PORTFOLYO</h2>
-    <p style="color: #aaa;">Proje Akışı ve Görsel Vitrin</p>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 20px;">
-      <div style="background: #222; padding: 15px; border-radius: 5px; border: 1px solid #333;">
-        <h3>ISO Web Core</h3>
-        <p>Terminal tabanlı kişisel platform mimarisi.</p>
-      </div>
-      <div style="background: #222; padding: 15px; border-radius: 5px; border: 1px solid #333;">
-        <h3>ISO Sarsılmaz Node</h3>
-        <p>Şifreli ağ ve yüksek güvenlik protokolü.</p>
-      </div>
-    </div>
+  <!-- 2. Arayüz: Portfolio / Galeri (GUI) -->
+  <div id="portfolio-screen" style="display: none; max-width: 800px; margin: 20px auto; padding: 20px; background: #111; color: #fff; text-align: center;">
+    <h2>ISO MARKA PORTFOLYO</h2>
+    <p>Tasarımlar ve içerikler bu bölümde listelenir.</p>
   </div>
 
-  <!-- 3. Arayüz: Canlı Akışlı Cyber HUD -->
+  <!-- 3. Arayüz: Efsane Akışlı Cyber HUD -->
   <div id="hud-screen" style="display: none;">
     <div class="hud-header">
-      <h2>[ ISO SYSTEM DIAGNOSTICS & HUD ]</h2>
-      <p>MARKA: ISO | BİRİM: ISO SARSILMAZ | STATUS: ONLINE</p>
-    </div>
-    
-    <div class="hud-content">
-      <div class="hud-box">
-        <h3>Sistem & Marka</h3>
-        <p>Sistem Sahibi: ISO</p>
-        <p>Operasyon Adı: ISO SARSILMAZ</p>
-        <p>Protokol: TLS 1.3 / SECURE NODE</p>
-      </div>
-      <div class="hud-box">
-        <h3>Yetki & Güvenlik</h3>
-        <p>Kullanıcı: iso@root</p>
-        <p>Erişim Seviyesi: FULL ROOT</p>
-        <p>Sarsılmaz Koruma: AKTİF</p>
-      </div>
+      <h2>[ ISO SARSILMAZ // SYSTEM HUD ]</h2>
+      <p>MARKA: ISO | BİRİM: ISO SARSILMAZ | STATUS: ROOT ACTIVE</p>
     </div>
 
-    <!-- Canlı Log / Veri Akış Kutusu -->
-    <div style="margin-top: 20px; background: #000; border: 1px solid #00e5ff; padding: 15px; font-family: monospace; color: #00e5ff; height: 120px; overflow-y: hidden;">
-      <div style="border-bottom: 1px solid #00e5ff; padding-bottom: 5px; margin-bottom: 8px; font-weight: bold;">[ CANLI CANLI LOG AKIŞI ]</div>
-      <p style="margin: 3px 0;">> [OK] ISO_SARSILMAZ_CORE initialized successfully.</p>
-      <p style="margin: 3px 0;">> [SEC] Encrypted connection established via Node #8821.</p>
-      <p style="margin: 3px 0;">> [NET] Ping: 12ms | Bandwidth: 1.2 Gbps | Memory Usage: 14%</p>
-      <p style="margin: 3px 0; color: #0f0;">> [SYS] Waiting for next command stream...</p>
+    <!-- Tam Ekran Akışlı Hacker Konsolu -->
+    <div class="matrix-stream">
+      <p class="green-text">> [BOOT] ISO_SARSILMAZ_CORE v4.0.1 loading...</p>
+      <p class="green-text">> [OK] Encrypted handshake established via Node #8821.</p>
+      <p class="green-text">> [SYS] CPU Temp: 34°C | Fan Speed: 2100 RPM | Voltage: 1.2V</p>
+      <p class="green-text">> [NET] Ping: 8ms | Bandwidth: 10 Gbps | SSL: TLS 1.3 Strict</p>
+      <p class="cyan-text">> [AUTH] Access Granted to User: iso@root (FULL PERMISSION)</p>
+      <p class="green-text">> [LOG] Bypassing secure gateway... SUCCESS</p>
+      <p class="green-text">> [LOG] Iso Sarsılmaz firewall layers activated.</p>
+      <p class="blink-text">> [WAITING] Listening for incoming matrix payload...</p>
     </div>
   </div>
 
