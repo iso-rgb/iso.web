@@ -6,19 +6,33 @@
 
 body {
   background-color: #030804;
-  background-image: radial-gradient(rgba(0, 255, 102, 0.08) 1px, transparent 0);
-  background-size: 20px 20px;
   color: #00ff66;
   font-family: 'Fira Code', monospace, Courier;
   margin: 0;
   padding: 30px 15px;
   display: flex;
   justify-content: center;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Canvas Arka Planı (Akan Harfler İçin) */
+#matrix-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  opacity: 0.25; /* Kartların okunmasını zorlaştırmaması için ideal saydamlık */
+  pointer-events: none;
 }
 
 .main-wrapper {
   width: 100%;
   max-width: 480px;
+  position: relative;
+  z-index: 1; /* İçerikler akan harflerin üzerinde durur */
 }
 
 /* Header Stilleri */
@@ -72,12 +86,13 @@ body {
 
 /* Terminal Penceresi */
 .terminal-window {
-  background: #080a08;
+  background: rgba(8, 10, 8, 0.9);
   border: 1px solid #00ff66;
   border-radius: 8px;
   box-shadow: 0 0 15px rgba(0, 255, 102, 0.2);
   overflow: hidden;
   margin-bottom: 20px;
+  backdrop-filter: blur(3px);
 }
 
 .window-bar {
@@ -141,11 +156,12 @@ body {
 
 /* Info Card */
 .info-card {
-  background: #080a08;
+  background: rgba(8, 10, 8, 0.9);
   border: 1px solid #00ff66;
   border-radius: 8px;
   padding: 18px;
   box-shadow: 0 0 10px rgba(0, 255, 102, 0.15);
+  backdrop-filter: blur(3px);
 }
 
 .card-title {
@@ -183,7 +199,7 @@ body {
 }
 
 .social-item:hover {
-  background: rgba(0, 255, 102, 0.15);
+  background: rgba(0, 255, 102, 0.2);
   border-color: #00ff66;
   box-shadow: 0 0 8px rgba(0, 255, 102, 0.4);
 }

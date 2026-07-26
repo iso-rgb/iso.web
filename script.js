@@ -1,33 +1,45 @@
-let currentMode = 0; 
+const canvas = document.getElementById('matrix-canvas');
+const ctx = canvas.getContext('2d');
 
-function switchMode(targetMode) {
-  const terminal = document.getElementById('terminal-screen');
-  const portfolio = document.getElementById('portfolio-screen');
-  const hud = document.getElementById('hud-screen');
-  const btn = document.getElementById('toggle-view-btn');
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
 
-  if (targetMode !== undefined) {
-    currentMode = targetMode;
-  } else {
-    currentMode = (currentMode + 1) % 3;
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+// Katakana ve Siber Karakterler
+const chars = 'ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ0123456789ABCDEFISO';
+const fontSize = 16;
+let columns = Math.floor(canvas.width / fontSize);
+let drops = Array(columns).fill(1);
+
+function drawMatrix() {
+  // Arka planı hafif siyah iz bırakarak temizler (iz efekti oluşturur)
+  ctx.fillStyle = 'rgba(3, 8, 4, 0.08)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = '#00ff66';
+  ctx.font = `${fontSize}px monospace`;
+
+  if (columns !== Math.floor(canvas.width / fontSize)) {
+    columns = Math.floor(canvas.width / fontSize);
+    drops = Array(columns).fill(1);
   }
 
-  if (terminal) terminal.style.display = 'none';
-  if (portfolio) portfolio.style.display = 'none';
-  if (hud) hud.style.display = 'none';
+  for (let i = 0; i < drops.length; i++) {
+    const text = chars.charAt(Math.floor(Math.random() * chars.length));
+    const x = i * fontSize;
+    const y = drops[i] * fontSize;
 
-  if (currentMode === 0) {
-    if (terminal) terminal.style.display = 'block';
-    if (btn) btn.innerText = '[ 🖼️ GUI Moda Geç ]';
-  } else if (currentMode === 1) {
-    if (portfolio) portfolio.style.display = 'block';
-    if (btn) btn.innerText = '[ 🖥️ HUD Moda Geç ]';
-  } else if (currentMode === 2) {
-    if (hud) hud.style.display = 'block';
-    if (btn) btn.innerText = '[ >_ Terminale Dön ]';
+    ctx.fillText(text, x, y);
+
+    if (y > canvas.height && Math.random() > 0.975) {
+      drops[i] = 0;
+    }
+    drops[i]++;
   }
 }
 
-function toggleView() {
-  switchMode();
-}
+setInterval(drawMatrix, 40);
