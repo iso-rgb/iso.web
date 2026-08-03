@@ -1,13 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Fira+Code:wght@400;700&display=swap');
 
 * {
   box-sizing: border-box;
 }
 
 body {
-  background-color: #030804;
+  background-color: #010a03;
+  /* Arka Plana Suudi Arabistan Bayrağı Yerleştirme */
+  background-image: 
+    linear-gradient(rgba(1, 10, 3, 0.85), rgba(1, 10, 3, 0.85)),
+    url('https://upload.wikimedia.org/wikipedia/commons/0/0d/Flag_of_Saudi_Arabia.svg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   color: #00ff66;
-  font-family: 'Fira Code', monospace, Courier;
+  font-family: 'Amiri', 'Fira Code', serif, monospace;
   margin: 0;
   padding: 30px 15px;
   display: flex;
@@ -16,7 +23,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Canvas Arka Planı (Akan Harfler İçin) */
+/* Canvas Arka Planı (Matrix Arapça Yağmuru) */
 #matrix-canvas {
   position: fixed;
   top: 0;
@@ -24,7 +31,7 @@ body {
   width: 100vw;
   height: 100vh;
   z-index: 0;
-  opacity: 0.25; /* Kartların okunmasını zorlaştırmaması için ideal saydamlık */
+  opacity: 0.35;
   pointer-events: none;
 }
 
@@ -32,7 +39,7 @@ body {
   width: 100%;
   max-width: 480px;
   position: relative;
-  z-index: 1; /* İçerikler akan harflerin üzerinde durur */
+  z-index: 1;
 }
 
 /* Header Stilleri */
@@ -42,6 +49,7 @@ body {
 }
 
 .glow-title {
+  font-family: 'Fira Code', monospace;
   font-size: 2.2rem;
   font-weight: 800;
   color: #00ff66;
@@ -51,14 +59,13 @@ body {
 }
 
 .subtitle {
-  color: #888888;
-  font-size: 0.8rem;
+  color: #a0a0a0;
+  font-size: 0.95rem;
   margin: 0 0 15px 0;
-  letter-spacing: 1px;
 }
 
 .status-bar {
-  font-size: 0.78rem;
+  font-size: 0.85rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -86,21 +93,22 @@ body {
 
 /* Terminal Penceresi */
 .terminal-window {
-  background: rgba(8, 10, 8, 0.9);
+  background: rgba(3, 15, 6, 0.92);
   border: 1px solid #00ff66;
   border-radius: 8px;
-  box-shadow: 0 0 15px rgba(0, 255, 102, 0.2);
+  box-shadow: 0 0 15px rgba(0, 255, 102, 0.25);
   overflow: hidden;
   margin-bottom: 20px;
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(4px);
 }
 
 .window-bar {
-  background: #020402;
+  background: #020803;
   padding: 8px 12px;
   display: flex;
   align-items: center;
   border-bottom: 1px solid rgba(0, 255, 102, 0.15);
+  direction: ltr;
 }
 
 .btn-dot {
@@ -120,12 +128,13 @@ body {
   font-size: 0.75rem;
   margin-left: auto;
   margin-right: auto;
+  font-family: 'Fira Code', monospace;
 }
 
 .terminal-body {
   padding: 20px 15px;
-  font-size: 0.88rem;
-  line-height: 1.6;
+  font-size: 0.95rem;
+  line-height: 1.7;
   color: #cccccc;
 }
 
@@ -136,14 +145,17 @@ body {
 
 .hacker-bio {
   color: #00e5ff;
-  font-size: 0.82rem;
+  font-size: 0.9rem;
   margin: 5px 0;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 .prompt {
   color: #00ff66;
   font-weight: bold;
+  font-family: 'Fira Code', monospace;
+  direction: ltr;
+  display: inline-block;
 }
 
 .cursor {
@@ -156,25 +168,25 @@ body {
 
 /* Info Card */
 .info-card {
-  background: rgba(8, 10, 8, 0.9);
+  background: rgba(3, 15, 6, 0.92);
   border: 1px solid #00ff66;
   border-radius: 8px;
   padding: 18px;
-  box-shadow: 0 0 10px rgba(0, 255, 102, 0.15);
-  backdrop-filter: blur(3px);
+  box-shadow: 0 0 10px rgba(0, 255, 102, 0.2);
+  backdrop-filter: blur(4px);
 }
 
 .card-title {
   color: #00ff66;
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   margin: 0 0 12px 0;
   font-weight: bold;
 }
 
 .card-desc {
-  color: #999999;
-  font-size: 0.85rem;
-  line-height: 1.5;
+  color: #aaaaaa;
+  font-size: 0.9rem;
+  line-height: 1.6;
   margin: 0;
 }
 
@@ -188,13 +200,13 @@ body {
 .social-item {
   display: flex;
   justify-content: space-between;
-  background: #030804;
+  background: #020803;
   border: 1px solid rgba(0, 255, 102, 0.3);
   padding: 10px 12px;
   border-radius: 5px;
   text-decoration: none;
   color: #00ff66;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   transition: all 0.2s ease;
 }
 
@@ -211,4 +223,5 @@ body {
 .social-user {
   font-weight: bold;
   color: #00e5ff;
+  font-family: 'Fira Code', monospace;
 }
